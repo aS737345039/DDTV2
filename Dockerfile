@@ -1,9 +1,11 @@
-FROM mcr.microsoft.com/dotnet/aspnet:5.0-alpine
+FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /DDTVLiveRec
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' >/etc/timezone \
-    && apk add --no-cache ffmpeg \
-    && wget -O DDTVLiveRec-info https://api.github.com/repos/CHKZL/DDTV2/releases/latest \
-    && DDTVLiveRec_RELEASE=$(cat DDTVLiveRec-info | awk '/tag_name/{print $5;exit}' FS='[r"]') \
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' >/etc/timezone  \
+    && apt update \
+    && apt install --no-install-recommends ffmpeg -y \
+    && apt-get clean -y  \
+    && rm -rf /var/lib/apt/lists/* \
+    && DDTVLiveRec_RELEASE=$(curl -sX GET https://api.github.com/repos/CHKZL/DDTV2/releases/latest | awk '/tag_name/{print $5;exit}' FS='[r"]') \
     && wget https://github.com/CHKZL/DDTV2/releases/latest/download/DDTVLiveRec-${DDTVLiveRec_RELEASE}.zip \
     && unzip DDTVLiveRec-*.zip \
     && rm DDTVLiveRec-*/DDTVLiveRec/*.exe DDTVLiveRec-*/DDTVLiveRec/*.txt \
