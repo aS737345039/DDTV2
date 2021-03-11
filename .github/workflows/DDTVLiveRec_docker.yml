@@ -18,7 +18,7 @@ jobs:
         id: prepare
         run: |
           VERSION=${{ github.event.client_payload.version }}
-          [[ ! -n $VERSION ]] && VERSION=Beta
+          [[ ! -n $VERSION ]] && VERSION=beta
           IMAGE_NAME=ddtvliverec
           TAG_VERSION="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:${VERSION}"
           TAG_LATEST="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:latest"
@@ -74,25 +74,25 @@ jobs:
         name: Create and push manifest lists
         run: |
           docker manifest create -a ${{ steps.prepare.outputs.tag_version }} \
-              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_version }}-amd64 \
-              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_version }}-arm64v8 \
-              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_version }}-arm32v7
+              ${{ steps.prepare.outputs.tag_version }}-amd64 \
+              ${{ steps.prepare.outputs.tag_version }}-arm64v8 \
+              ${{ steps.prepare.outputs.tag_version }}-arm32v7
           
           docker manifest annotate ${{ steps.prepare.outputs.tag_version }} \
-              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_version }}-amd64 \
+              ${{ steps.prepare.outputs.tag_version }}-amd64 \
               --arch=amd64 \
               --os=linux  \
               --os-version=aspnet:5.0-alpine
           
           docker manifest annotate ${{ steps.prepare.outputs.tag_version }} \
-              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_version }}-arm64v8 \
+              ${{ steps.prepare.outputs.tag_version }}-arm64v8 \
               --arch=arm64 \
               --os=linux  \
               --variant=v8 \
               --os-version=aspnet:5.0-alpine
           
           docker manifest annotate ${{ steps.prepare.outputs.tag_version }} \
-              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_version }}-arm32v7 \
+              ${{ steps.prepare.outputs.tag_version }}-arm32v7 \
               --arch=arm \
               --os=linux  \
               --variant=v7 \
@@ -101,25 +101,25 @@ jobs:
           docker manifest push ${{ steps.prepare.outputs.tag_version }}
           
           docker manifest create -a ${{ steps.prepare.outputs.tag_latest }} \
-              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_latest }}-amd64 \
-              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_latest }}-arm64v8 \
-              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_latest }}-arm32v7
+              ${{ steps.prepare.outputs.tag_latest }}-amd64 \
+              ${{ steps.prepare.outputs.tag_latest }}-arm64v8 \
+              ${{ steps.prepare.outputs.tag_latest }}-arm32v7
           
           docker manifest annotate ${{ steps.prepare.outputs.tag_latest }} \
-              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_latest }}-amd64 \
+              ${{ steps.prepare.outputs.tag_latest }}-amd64 \
               --arch=amd64 \
               --os=linux  \
               --os-version=aspnet:5.0-alpine
           
           docker manifest annotate ${{ steps.prepare.outputs.tag_latest }} \
-              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_latest }}-arm64v8 \
+              ${{ steps.prepare.outputs.tag_latest }}-arm64v8 \
               --arch=arm64 \
               --os=linux  \
               --variant=v8 \
               --os-version=aspnet:5.0-alpine
           
           docker manifest annotate ${{ steps.prepare.outputs.tag_latest }} \
-              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_latest }}-arm32v7 \
+              ${{ steps.prepare.outputs.tag_latest }}-arm32v7 \
               --arch=arm \
               --os=linux  \
               --variant=v7 \
