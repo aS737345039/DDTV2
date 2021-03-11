@@ -10,7 +10,5 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shangh
     && mv DDTVLiveRec-Release/DDTV*/DDTV*/* /DDTVLiveRec \
     && rm -rf DDTVLiveRec-*
 EXPOSE 11419
-VOLUME /DDTVLiveRec/tmp
-VOLUME /DDTVLiveRec/BiliUser.ini
-VOLUME /DDTVLiveRec/RoomListConfig.json
+VOLUME /DDTVLiveRec/tmp /DDTVLiveRec/BiliUser.ini /DDTVLiveRec/RoomListConfig.json
 ENTRYPOINT ["dotnet", "DDTVLiveRec.dll"]

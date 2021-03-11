@@ -126,6 +126,3 @@ jobs:
               --os-version=aspnet:5.0-debian
           
           docker manifest push ${{ steps.prepare.outputs.tag_latest }}
-          
-          docker manifest inspect ${{ steps.prepare.outputs.tag_version }}
-          docker manifest inspect ${{ steps.prepare.outputs.tag_latest }}

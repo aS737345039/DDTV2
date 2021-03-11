@@ -13,7 +13,5 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shangh
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 EXPOSE 11419
-VOLUME /DDTVLiveRec/tmp
-VOLUME /DDTVLiveRec/BiliUser.ini
-VOLUME /DDTVLiveRec/RoomListConfig.json
+VOLUME /DDTVLiveRec/tmp /DDTVLiveRec/BiliUser.ini /DDTVLiveRec/RoomListConfig.json
 ENTRYPOINT ["dotnet", "DDTVLiveRec.dll"]
