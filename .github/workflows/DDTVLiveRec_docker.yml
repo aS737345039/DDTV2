@@ -3,7 +3,7 @@ name: DDTVLiveRec_docker
 on:
   push:
     branches:
-      #- master
+      - master
       - dockerhub
 
 jobs:
@@ -44,7 +44,7 @@ jobs:
         with:
           context: .
           file: Dockerfile.debian
-          platforms: linux/arm/v7
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
           build-args: ${{ steps.prepare.outputs.build_args }}
           tags: ${{ steps.prepare.outputs.tags_debian }}
