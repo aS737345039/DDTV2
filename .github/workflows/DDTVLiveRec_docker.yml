@@ -1,10 +1,8 @@
 name: DDTVLiveRec_docker
 
 on:
-  push:
-    branches:
-      - master
-      - dockerhub
+  release:
+    types: [released]
 
 jobs:
   docker:
@@ -44,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: Dockerfile.debian
+          file: ./DDTVLiveRec/Dockerfile.debian
           platforms: linux/arm/v7
           push: true
           build-args: ${{ steps.prepare.outputs.build_args }}
@@ -54,7 +52,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: Dockerfile.alpine
+          file: ./DDTVLiveRec/Dockerfile.alpine
           platforms: linux/arm64
           push: true
           build-args: ${{ steps.prepare.outputs.build_args }}
@@ -64,7 +62,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: Dockerfile.alpine
+          file: ./DDTVLiveRec/Dockerfile.alpine
           platforms: linux/amd64
           push: true
           build-args: ${{ steps.prepare.outputs.build_args }}
