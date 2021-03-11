@@ -66,7 +66,7 @@ jobs:
           push: true
           build-args: ${{ steps.prepare.outputs.build_args }}
           tags: ${{ steps.prepare.outputs.tag_version }}-amd64,${{ steps.prepare.outputs.tag_latest }}-amd64
-#添加多架构镜像
+#创建并推送多架构镜像
       -
         name: Create and push manifest lists
         run: |
