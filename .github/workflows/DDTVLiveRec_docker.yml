@@ -20,12 +20,12 @@ jobs:
           VERSION=${{ github.event.client_payload.version }}
           [[ ! -n $VERSION ]] && VERSION=Beta
           IMAGE_NAME=ddtvliverec
-          TAGS_DEBIAN="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:${VERSION}-Debian,${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:latest"
-          TAGS_ALPINE="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:${VERSION}-Alpine,${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:latest"
+          TAG_VERSION="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:${VERSION}"
+          TAG_LATEST="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:latest"
           echo ::set-output name=build_args::VERSION=${VERSION}
-          echo ::set-output name=image-name::${IMAGE_NAME}
-          echo ::set-output name=tags_debian::${TAGS_DEBIAN}
-          echo ::set-output name=tags_alpine::${TAGS_ALPINE}
+          echo ::set-output name=image_name::${IMAGE_NAME}
+          echo ::set-output name=tag_version::${TAG_VERSION}
+          echo ::set-output name=tag_latest::${TAG_LATEST}
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -38,24 +38,94 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
+#构建各架构镜像
       -
-        name: Build and push debian
+        name: Build and push linux/arm/v7
         uses: docker/build-push-action@v2
         with:
           context: .
           file: Dockerfile.debian
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/arm/v7
           push: true
           build-args: ${{ steps.prepare.outputs.build_args }}
-          tags: ${{ steps.prepare.outputs.tags_debian }}
+          tags: ${{ steps.prepare.outputs.tag_version }}-arm32v7,${{ steps.prepare.outputs.tag_latest }}-arm32v7
       -
-        name: Build and push alpine
+        name: Build and push linux/arm64
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: Dockerfile.alpine
+          platforms: linux/arm64
+          push: true
+          build-args: ${{ steps.prepare.outputs.build_args }}
+          tags: ${{ steps.prepare.outputs.tag_version }}-arm64v8,${{ steps.prepare.outputs.tag_latest }}-arm32v7
+      -
+        name: Build and push linux/amd64
         uses: docker/build-push-action@v2
         with:
           context: .
           file: Dockerfile.alpine
           platforms: linux/amd64
-          #,linux/arm64
           push: true
           build-args: ${{ steps.prepare.outputs.build_args }}
-          tags: ${{ steps.prepare.outputs.tags_alpine }}
+          tags: ${{ steps.prepare.outputs.tag_version }}-amd64,${{ steps.prepare.outputs.tag_latest }}-arm32v7
+#添加多架构镜像
+      -
+        name: Create and push manifest lists
+        run: |
+          docker manifest create -a ${{ steps.prepare.outputs.tag_version }} \
+              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_version }}-amd64 \
+              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_version }}-arm64v8 \
+              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_version }}-arm32v7
+          
+          docker manifest annotate ${{ steps.prepare.outputs.tag_version }} \
+              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_version }}-amd64 \
+              --arch=amd64 \
+              --os=linux  \
+              --os-version=aspnet:5.0-alpine
+          
+          docker manifest annotate ${{ steps.prepare.outputs.tag_version }} \
+              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_version }}-arm64v8 \
+              --arch=arm64 \
+              --os=linux  \
+              --variant=v8 \
+              --os-version=aspnet:5.0-alpine
+          
+          docker manifest annotate ${{ steps.prepare.outputs.tag_version }} \
+              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_version }}-arm32v7 \
+              --arch=arm \
+              --os=linux  \
+              --variant=v7 \
+              --os-version=aspnet:5.0-debian
+          
+          docker manifest push ${{ steps.prepare.outputs.tag_version }}
+          
+          docker manifest create -a ${{ steps.prepare.outputs.tag_latest }} \
+              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_latest }}-amd64 \
+              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_latest }}-arm64v8 \
+              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_latest }}-arm32v7
+          
+          docker manifest annotate ${{ steps.prepare.outputs.tag_latest }} \
+              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_latest }}-amd64 \
+              --arch=amd64 \
+              --os=linux  \
+              --os-version=aspnet:5.0-alpine
+          
+          docker manifest annotate ${{ steps.prepare.outputs.tag_latest }} \
+              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_latest }}-arm64v8 \
+              --arch=arm64 \
+              --os=linux  \
+              --variant=v8 \
+              --os-version=aspnet:5.0-alpine
+          
+          docker manifest annotate ${{ steps.prepare.outputs.tag_latest }} \
+              ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.prepare.outputs.image_name }}:${{ steps.prepare.outputs.tag_latest }}-arm32v7 \
+              --arch=arm \
+              --os=linux  \
+              --variant=v7 \
+              --os-version=aspnet:5.0-debian
+          
+          docker manifest push ${{ steps.prepare.outputs.tag_latest }}
+          
+          docker manifest inspect ${{ steps.prepare.outputs.tag_version }}
+          docker manifest inspect ${{ steps.prepare.outputs.tag_latest }}
