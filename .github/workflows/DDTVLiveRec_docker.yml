@@ -1,8 +1,10 @@
 name: DDTVLiveRec_docker
 
 on:
-  release:
-    types: [released]
+  push:
+    branches:
+      - master
+      - dockerhub
 
 jobs:
   docker:
@@ -15,8 +17,7 @@ jobs:
         name: Prepare
         id: prepare
         run: |
-          VERSION=${{ github.event.client_payload.version }}
-          [[ ! -n $VERSION ]] && VERSION=beta
+          VERSION=$(curl -sX GET "https://api.github.com/repos/CHKZL/DDTV2/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]')
           IMAGE_NAME=ddtvliverec
           TAG_VERSION="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:${VERSION}"
           TAG_LATEST="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:latest"
@@ -42,7 +43,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./DDTVLiveRec/Dockerfile.debian
+          file: Dockerfile.debian
           platforms: linux/arm/v7
           push: true
           build-args: ${{ steps.prepare.outputs.build_args }}
@@ -52,7 +53,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./DDTVLiveRec/Dockerfile.alpine
+          file: Dockerfile.alpine
           platforms: linux/arm64
           push: true
           build-args: ${{ steps.prepare.outputs.build_args }}
@@ -62,7 +63,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./DDTVLiveRec/Dockerfile.alpine
+          file: Dockerfile.alpine
           platforms: linux/amd64
           push: true
           build-args: ${{ steps.prepare.outputs.build_args }}
