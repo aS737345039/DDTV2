@@ -1,10 +1,8 @@
 name: DDTVLiveRec_docker
 
 on:
-  push:
-    branches:
-      - master
-      - dockerhub
+  release:
+    types: [released]
 
 jobs:
   docker:
