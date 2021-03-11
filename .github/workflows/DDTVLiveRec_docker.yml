@@ -18,7 +18,7 @@ jobs:
         id: prepare
         run: |
           VERSION=${{ github.event.client_payload.version }}
-#          [[ ! -n $VERSION ]] && VERSION=Beta
+          [[ ! -n $VERSION ]] && VERSION=Beta
           IMAGE_NAME=ddtvliverec
           TAGS_DEBIAN="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:${VERSION}-Debian,${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:latest"
           TAGS_ALPINE="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:${VERSION}-Alpine,${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:latest"
