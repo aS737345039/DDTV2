@@ -9,12 +9,12 @@ name: DDTVLiveRec_docker
 #  schedule:
 #    - cron:  '0 5 * * 1 '
 #
-#DOCKERHUB=$(curl -sX GET "https://hub.docker.com/v1/repositories/as737345039/ddtvliverec/tags" \ | awk '{print $16;exit}' FS='[""]')
-#echo ::set-output name=push_state::${{VERSION != DOCKERHUB}}
+# DOCKERHUB_VERSION=$(curl -sX GET "https://hub.docker.com/v1/repositories/as737345039/ddtvliverec/tags" \ | awk '{print $16;exit}' FS='[""]')
+# echo ::set-output name=dockerhub_version::${DOCKERHUB_VERSION}
 #
-#if: ${{ steps.prepare.outputs.push_state }}
+# if: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.build_args }}
 
-#将${{ steps.prepare.outputs.push_state }}改为true
+#将push: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.build_args }}改为push: true
 
 on:
   release:
@@ -38,15 +38,15 @@ jobs:
         id: prepare
         run: |
           VERSION=$(curl -sX GET "https://api.github.com/repos/CHKZL/DDTV2/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]')
-          DOCKERHUB=$(curl -sX GET "https://hub.docker.com/v1/repositories/as737345039/ddtvliverec/tags" \ | awk '{print $16;exit}' FS='[""]')
+          DOCKERHUB_VERSION=$(curl -sX GET "https://hub.docker.com/v1/repositories/as737345039/ddtvliverec/tags" \ | awk '{print $16;exit}' FS='[""]')
           IMAGE_NAME=ddtvliverec
           TAG_VERSION="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:${VERSION}"
           TAG_LATEST="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:latest"
-          echo ::set-output name=build_args::VERSION=${VERSION}
+          echo ::set-output name=build_args::${VERSION}
           echo ::set-output name=image_name::${IMAGE_NAME}
           echo ::set-output name=tag_version::${TAG_VERSION}
           echo ::set-output name=tag_latest::${TAG_LATEST}
-          echo ::set-output name=push_state::${${VERSION} != ${DOCKERHUB}}
+          echo ::set-output name=dockerhub_version::${DOCKERHUB_VERSION}
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -67,7 +67,7 @@ jobs:
           context: .
           file: ./DDTVLiveRec/Dockerfile.debian
           platforms: linux/arm/v7
-          push: ${{ steps.prepare.outputs.push_state }}
+          push: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.build_args }}
           build-args: ${{ steps.prepare.outputs.build_args }}
           tags: ${{ steps.prepare.outputs.tag_version }}-arm32v7,${{ steps.prepare.outputs.tag_latest }}-arm32v7
       -
@@ -77,7 +77,7 @@ jobs:
           context: .
           file: ./DDTVLiveRec/Dockerfile.alpine
           platforms: linux/arm64
-          push: ${{ steps.prepare.outputs.push_state }}
+          push: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.build_args }}
           build-args: ${{ steps.prepare.outputs.build_args }}
           tags: ${{ steps.prepare.outputs.tag_version }}-arm64v8,${{ steps.prepare.outputs.tag_latest }}-arm64v8
       -
@@ -87,13 +87,13 @@ jobs:
           context: .
           file: ./DDTVLiveRec/Dockerfile.alpine
           platforms: linux/amd64
-          push: ${{ steps.prepare.outputs.push_state }}
+          push: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.build_args }}
           build-args: ${{ steps.prepare.outputs.build_args }}
           tags: ${{ steps.prepare.outputs.tag_version }}-amd64,${{ steps.prepare.outputs.tag_latest }}-amd64
 #创建并推送多架构镜像
       -
         name: Create and push manifest lists
-        if: ${{ steps.prepare.outputs.push_state }}
+        if: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.build_args }}
         run: |
           docker manifest create -a ${{ steps.prepare.outputs.tag_version }} \
               ${{ steps.prepare.outputs.tag_version }}-amd64 \
