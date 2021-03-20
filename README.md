@@ -56,7 +56,7 @@ docker run -d \
 
 ## 从源码构建
 
-1. [zzcabc的ddtv项目](https://hub.docker.com/r/zzcabc/ddtv)提供了由源码编译镜像，在github中手动点击Star可获取最新的源码，并自动化编译并上传，目前仅支持AMD64位CPU架构；
+1. [zzcabc的ddtv项目](https://hub.docker.com/r/zzcabc/ddtv)提供了由源码编译的镜像；
 
 2. 拉取源项目源码进行构建，详见[源项目使用说明](https://github.com/CHKZL/DDTV2/tree/master/DDTVLiveRec#%E5%A6%82%E6%9E%9C%E4%BD%BF%E7%94%A8docker%E6%9E%84%E5%BB%BA)。
 
