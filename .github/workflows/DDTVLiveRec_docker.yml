@@ -14,8 +14,6 @@ name: DDTVLiveRec_docker
 #
 # if: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.build_args }}
 
-#将push: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.build_args }}改为push: true
-
 on:
   release:
     types: [released]
@@ -49,12 +47,15 @@ jobs:
           echo ::set-output name=dockerhub_version::${DOCKERHUB_VERSION}
       -
         name: Set up QEMU
+        if: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.build_args }}
         uses: docker/setup-qemu-action@v1
       -
         name: Set up Docker Buildx
+        if: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.build_args }}
         uses: docker/setup-buildx-action@v1
       -
         name: Login to DockerHub
+        if: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.build_args }}
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -62,32 +63,35 @@ jobs:
 #构建各架构镜像
       -
         name: Build and push linux/arm/v7
+        if: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.build_args }}
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./DDTVLiveRec/Dockerfile.debian
           platforms: linux/arm/v7
-          push: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.build_args }}
+          push: true
           build-args: ${{ steps.prepare.outputs.build_args }}
           tags: ${{ steps.prepare.outputs.tag_version }}-arm32v7,${{ steps.prepare.outputs.tag_latest }}-arm32v7
       -
         name: Build and push linux/arm64
+        if: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.build_args }}
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./DDTVLiveRec/Dockerfile.alpine
           platforms: linux/arm64
-          push: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.build_args }}
+          push: true
           build-args: ${{ steps.prepare.outputs.build_args }}
           tags: ${{ steps.prepare.outputs.tag_version }}-arm64v8,${{ steps.prepare.outputs.tag_latest }}-arm64v8
       -
         name: Build and push linux/amd64
+        if: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.build_args }}
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./DDTVLiveRec/Dockerfile.alpine
           platforms: linux/amd64
-          push: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.build_args }}
+          push: true
           build-args: ${{ steps.prepare.outputs.build_args }}
           tags: ${{ steps.prepare.outputs.tag_version }}-amd64,${{ steps.prepare.outputs.tag_latest }}-amd64
 #创建并推送多架构镜像
