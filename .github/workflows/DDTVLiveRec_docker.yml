@@ -46,7 +46,7 @@ jobs:
           echo ::set-output name=image_name::${IMAGE_NAME}
           echo ::set-output name=tag_version::${TAG_VERSION}
           echo ::set-output name=tag_latest::${TAG_LATEST}
-          echo ::set-output name=push_state::${{VERSION != DOCKERHUB}}
+          echo ::set-output name=push_state::${{${VERSION} != ${DOCKERHUB}}}
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
