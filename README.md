@@ -1,72 +1,62 @@
-# DDTV2
+# Docker-DDTVLiveRec
 
-DDTV1.0的精神续作.jpg     
-使用.NET Core和WPF完全重写了，修改了很多在1.0不科学的地方。    
-***
-(代码中大量 **中文** 变量\函数 **易#** 警告，美术生出身，请各位大佬轻拍 
-***
-# 包含的项目(点击项目名查看详细说明)
-**(点击项目名查看详细说明)**  
-**(点击项目名查看详细说明)**  
-|  项目名称 | 框架 | 平台 | 说明 |
-|  ----  | ---- | ---- | ---- |
-| [DDTV_New](https://github.com/CHKZL/DDTV2/tree/master/DDTV_New)  | .NET Framework 4.7.2 | Windows | DDTV2本体 |
-| [DDTVLiveRec](https://github.com/CHKZL/DDTV2/tree/master/DDTVLiveRec) | .NET5 | Windows/Linux/MacOS | 适用于多平台的录制工具 |
-| Auxiliary  | .NET Framework 4.7.2(没用特殊的库,兼容.NET5) | Windows | 为项目写的各种共用方法依赖 |
-| DDTVLiveRecWebServer  | .NET5 | Windows/Linux/MacOS | 为项目提供WEB访问查询功能 |
-| PlayW  | .NET Framework 4.7.2 | Windows | 用于播放视频流和弹幕解析 |
-***
-###
-功能  
-DDTV_New：
-* 多路直播监控，可自定义监听房间，摸鱼中\直播中一目了然
-* 多窗口随意排列
-* 播放窗口无边框，勿扰模式
-* 每路声音可单独调整
-* 手动录像/开播自动录像
-* 监控列表开播提示
-* 在滑动鼠标滚轮修改窗口音量
-* 缩小到系统托盘后台监听
-* 弹幕显示
-* 野生字幕显示
-* 油管，TC平台直播状况查看
-* 开播,录像气泡提示
-* 多路异步下载
-* 在播放窗口CTRL+D老板键
-* 扫码登陆功能
-* 登陆后阿B关注列表VTB\VUP一键自动导入
-* 登陆买票后可以观看付费直播内容
-* 直播弹幕发送
-* 录制完成后自动合并文件
-* 录制完成后自动转码为MP4并修复直播流flv时间轴错误的问题
-* 在录制的同时储存弹幕信息为ass文件
-* 本体自动更新
+[源项目地址](https://github.com/CHKZL/DDTV2)
 
+[本项目地址](https://github.com/aS737345039/Docker-DDTVLiveRec)
 
-DDTVLiveRec
-* 支持linux，可以挂在路由器或树莓派等linux嵌入式设备上运行
-* 开播自动录制
-* 录制完成后自动合并文件
-* 录制完成后自动转码为MP4并修复直播流flv时间轴错误的问题 (在Linux/MacOS上需要自行安装ffmpeg)
-* 多路异步下载
-* 在网页直接查看运行状态\日志\下载文件列表
-* 登陆买票后可以录制付费直播内容
-* 在录制的同时储存弹幕信息为ass文件
+本项目利用GitHub Action，以mcr.microsoft.com/dotnet/aspnet为基础镜像，将DDTVLiveRec的发行版及ffmpeg，打包成Docker镜像，自动上传至[DockerHub](https://hub.docker.com/r/as737345039/ddtvliverec)。
 
-***
+支持的各架构及其基础镜像如下（截至2021/3/14）：
 
-## 写给不会使用gayhub的：怎么下载？？？怎么下载？？？怎么下载？？？
-↓↓↓↓↓↓↓↓↓↓↓↓↓↓点击跳转下载页面↓↓↓↓↓↓↓↓↓↓↓↓↓↓  
-[点击跳转到releases下载页面](https://github.com/CHKZL/DDTV2/releases/latest)  
-↑↑↑↑↑↑↑↑↑↑↑↑↑↑点击跳转下载页面↑↑↑↑↑↑↑↑↑↑↑↑↑↑  
-===如果实在是下载不动也可以加群在群共享中下载,群：307156949===  
-(有任何问题和需要增加的功能也欢迎加群
-# 使用到的第三方组件
-* [BiliAccount](https://github.com/LeoChen98/BiliAccount)
-* [FFmpeg](https://github.com/FFmpeg/FFmpeg)
-* [vtbs.moe](https://github.com/dd-center/vtbs.moe)
+|  架构 | ASP.NET Tag | OS Version  | Dockerfile |
+|  ----  | ----  | ----  | ----  |
+| amd64  | 5.0-alpine | Alpine 3.13 | [Dockerfile](https://github.com/aS737345039/Docker-DDTVLiveRec/blob/dockerhub/DDTVLiveRec/Dockerfile.alpine) |
+| arm64  | 5.0-alpine | Alpine 3.13 | [Dockerfile](https://github.com/aS737345039/Docker-DDTVLiveRec/blob/dockerhub/DDTVLiveRec/Dockerfile.alpine) |
+| arm32  | latest | Debian 10 | [Dockerfile](https://github.com/aS737345039/Docker-DDTVLiveRec/blob/dockerhub/DDTVLiveRec/Dockerfile.debian) |
 
-# 捐助
+## 使用方法
+
+### 1. 更新本镜像
+
+- 查看[源项目最新发行](https://github.com/CHKZL/DDTV2/releases/latest)，若[Tags页](https://hub.docker.com/r/as737345039/ddtvliverec/tags?page=1&ordering=last_updated)里无最新发行，在github中Star[本项目](https://github.com/aS737345039/Docker-DDTVLiveRec)进行自动更新，在[Action](https://github.com/aS737345039/Docker-DDTVLiveRec/actions)中查看进度。
+
+### 2. 准备文件（详见[源项目使用说明](https://github.com/CHKZL/DDTV2/tree/master/DDTVLiveRec#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)）
+
+- 注1：DDTVLiveRec.dll.config为DDTVLiveRec的配置文件，如果不需要`自动转码为MP4`与`储存弹幕信息`这两个功能，可以不需要配置该文件。
+
+- 注2：DDTVLiveRec.dll.config的来源方式：①win下运行`DDTVLiveRec`后获取（MacOS不了解）；②linux或linux docker下运行`DDTVLiveRec`后获取。
+
+|  文件名 | 文件来自 |
+|  ----  | ----  |
+|  RoomListConfig.json  | 配置好的DDTV目录 |
+|  BiliUser.ini  | 配置好的DDTV目录  |
+|  DDTVLiveRec.dll.config  | 配置好的DDTVLiveRec目录  |
+
+### 3. 运行docker
+
+- 注1：如果没有`DDTVLiveRec.dll.config`文件，请删去`-v ${CONFIG_DIR}/DDTVLiveRec.dll.config:/DDTVLiveRec/DDTVLiveRec.dll.config \`这行
+
+- 注2：如果想从docker下获取`DDTVLiveRec.dll.config`文件，使用`docker exec -it ddtv /bin/sh`进入ddtv镜像后，`cp DDTVLiveRec.dll.config tmp`在`${DOWNLOAD_DIR}`文件夹下找到`DDTVLiveRec.dll.config`文件
+
+```dockerfile
+docker run -d \
+    --restart always \
+    -p 11419:11419 \
+    -v ${CONFIG_DIR}/BiliUser.ini:/DDTVLiveRec/BiliUser.ini \
+    -v ${CONFIG_DIR}/DDTVLiveRec.dll.config:/DDTVLiveRec/DDTVLiveRec.dll.config \
+    -v ${CONFIG_DIR}/RoomListConfig.json:/DDTVLiveRec/RoomListConfig.json \
+    -v ${DOWNLOAD_DIR}:/DDTVLiveRec/tmp \
+    --name ddtv \
+    as737345039/ddtvliverec:latest
+```
+
+## 从源码构建
+
+1. [zzcabc的ddtv项目](https://hub.docker.com/r/zzcabc/ddtv)提供了由源码编译镜像，在github中手动点击Star可获取最新的源码，并自动化编译并上传，目前仅支持AMD64位CPU架构；
+
+2. 拉取源项目源码进行构建，详见[源项目使用说明](https://github.com/CHKZL/DDTV2/tree/master/DDTVLiveRec#%E5%A6%82%E6%9E%9C%E4%BD%BF%E7%94%A8docker%E6%9E%84%E5%BB%BA)。
+
+# 对源项目作者的捐助
 ### 捐助表示您对我这个项目的认可，也能激励我继续开发更多好的项目
 
 ![生活](https://github.com/CHKZL/DDTV2/blob/master/DDTV_New/%E7%94%9F%E6%B4%BB.png)
