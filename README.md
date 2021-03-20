@@ -4,15 +4,15 @@
 
 [本项目地址](https://github.com/aS737345039/Docker-DDTVLiveRec)
 
-本项目利用GitHub Action，以mcr.microsoft.com/dotnet/aspnet为基础镜像，将DDTVLiveRec的发行版及ffmpeg，打包成Docker镜像，自动上传至[DockerHub](https://hub.docker.com/r/as737345039/ddtvliverec)。
+本项目利用GitHub Action，以[mcr.microsoft.com/dotnet/aspnet](https://hub.docker.com/_/microsoft-dotnet-aspnet)为基础镜像，将DDTVLiveRec的发行版及ffmpeg，打包成Docker镜像，自动上传至[DockerHub](https://hub.docker.com/r/as737345039/ddtvliverec)。
 
 支持的各架构及其基础镜像如下（截至2021/3/14）：
 
 |  架构 | ASP.NET Tag | OS Version  | Dockerfile |
 |  ----  | ----  | ----  | ----  |
 | amd64  | 5.0-alpine | Alpine 3.13 | [Dockerfile](https://github.com/aS737345039/Docker-DDTVLiveRec/blob/dockerhub/DDTVLiveRec/Dockerfile.alpine) |
-| arm64  | 5.0-alpine | Alpine 3.13 | [Dockerfile](https://github.com/aS737345039/Docker-DDTVLiveRec/blob/dockerhub/DDTVLiveRec/Dockerfile.alpine) |
-| arm32  | latest | Debian 10 | [Dockerfile](https://github.com/aS737345039/Docker-DDTVLiveRec/blob/dockerhub/DDTVLiveRec/Dockerfile.debian) |
+| arm64v8  | 5.0-alpine | Alpine 3.13 | [Dockerfile](https://github.com/aS737345039/Docker-DDTVLiveRec/blob/dockerhub/DDTVLiveRec/Dockerfile.alpine) |
+| arm32v7  | latest | Debian 10 | [Dockerfile](https://github.com/aS737345039/Docker-DDTVLiveRec/blob/dockerhub/DDTVLiveRec/Dockerfile.debian) |
 
 ## 使用方法
 
