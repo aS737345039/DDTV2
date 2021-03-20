@@ -7,7 +7,7 @@ name: DDTVLiveRec_docker
 #  watch:
 #    types: [started]
 #  schedule:
-#    - cron:  '0 0 5 * * 1 '
+#    - cron:  '0 5 * * 1 '
 #
 #DOCKERHUB=$(curl -sX GET "https://hub.docker.com/v1/repositories/as737345039/ddtvliverec/tags" \ | awk '{print $16;exit}' FS='[""]')
 #echo ::set-output name=push_state::${{VERSION != DOCKERHUB}}
@@ -24,7 +24,7 @@ on:
   watch:
     types: [started]
   schedule:
-    - cron:  '0 0 5 * * 1 '
+    - cron:  '0 5 * * 1 '
 
 jobs:
   docker:
