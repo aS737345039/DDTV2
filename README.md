@@ -1,5 +1,7 @@
 # Docker-DDTVLiveRec
 
+[![DDTVLiveRec_docker](https://github.com/aS737345039/Docker-DDTVLiveRec/actions/workflows/DDTVLiveRec_docker.yml/badge.svg)](https://github.com/aS737345039/Docker-DDTVLiveRec/actions/workflows/DDTVLiveRec_docker.yml)
+
 [源项目地址](https://github.com/CHKZL/DDTV2)
 
 [本项目地址](https://github.com/aS737345039/Docker-DDTVLiveRec)
@@ -17,6 +19,8 @@
 ## 使用方法
 
 ### 1. 更新本镜像
+
+[![DDTVLiveRec_docker](https://github.com/aS737345039/Docker-DDTVLiveRec/actions/workflows/DDTVLiveRec_docker.yml/badge.svg)](https://github.com/aS737345039/Docker-DDTVLiveRec/actions/workflows/DDTVLiveRec_docker.yml)
 
 - 查看[源项目最新发行](https://github.com/CHKZL/DDTV2/releases/latest)，若[Tags页](https://hub.docker.com/r/as737345039/ddtvliverec/tags?page=1&ordering=last_updated)里无最新发行，在github中Star[本项目](https://github.com/aS737345039/Docker-DDTVLiveRec)进行自动更新，在[Action](https://github.com/aS737345039/Docker-DDTVLiveRec/actions)中查看进度。
 
