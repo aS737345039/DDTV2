@@ -36,7 +36,7 @@
 
 - 注1：如果没有`DDTVLiveRec.dll.config`文件，请删去`-v ${CONFIG_DIR}/DDTVLiveRec.dll.config:/DDTVLiveRec/DDTVLiveRec.dll.config \`这行
 
-- 注2：如果想从docker下获取`DDTVLiveRec.dll.config`文件，使用`docker exec -it ddtv /bin/sh`进入ddtv镜像后，`cp DDTVLiveRec.dll.config tmp`在`${DOWNLOAD_DIR}`文件夹下找到`DDTVLiveRec.dll.config`文件
+- 注2：如果想从docker下获取`DDTVLiveRec.dll.config`文件，使用`docker exec -it ddtv /bin/sh`进入ddtv镜像后，`cp DDTVLiveRec.dll.config tmp`，在`${DOWNLOAD_DIR}`文件夹下找到`DDTVLiveRec.dll.config`文件
 
 ```dockerfile
 docker run -d \
