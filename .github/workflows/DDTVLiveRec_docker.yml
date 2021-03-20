@@ -4,7 +4,9 @@ on:
   release:
     types: [released]
   push:
-    branches: [ dockerhub ]
+    branches: [dockerhub]
+  watch:
+    types: [started]
 
 jobs:
   docker:
