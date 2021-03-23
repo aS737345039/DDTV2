@@ -1,28 +1,32 @@
 # Docker-DDTVLiveRec
 
-[![DDTVLiveRec_docker](https://github.com/aS737345039/Docker-DDTVLiveRec/actions/workflows/DDTVLiveRec_docker.yml/badge.svg)](https://github.com/aS737345039/Docker-DDTVLiveRec/actions/workflows/DDTVLiveRec_docker.yml)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/CHKZL/DDTV2?label=DDTVLiveRec&style=flat-square)](https://github.com/CHKZL/DDTV2/releases/latest)
+[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/as737345039/ddtvliverec?label=DockerHub&style=flat-square)](https://hub.docker.com/r/as737345039/ddtvliverec/tags?page=1&ordering=last_updated)
+[![GitHub Repo stars](https://img.shields.io/github/stars/aS737345039/Docker-DDTVLiveRec?color=orange&style=flat-square)](https://github.com/aS737345039/Docker-DDTVLiveRec)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/aS737345039/Docker-DDTVLiveRec/DDTVLiveRec_docker?label=Docker%20Build&style=flat-square)](https://github.com/aS737345039/Docker-DDTVLiveRec/actions/workflows/DDTVLiveRec_docker.yml)
 
-[源项目地址](https://github.com/CHKZL/DDTV2)
-
-[本项目地址](https://github.com/aS737345039/Docker-DDTVLiveRec)
+[源项目地址](https://github.com/CHKZL/DDTV2)　　[本项目地址](https://github.com/aS737345039/Docker-DDTVLiveRec)　　[zzcabc的ddtv项目提供了由源码编译的镜像](https://hub.docker.com/r/zzcabc/ddtv)
 
 本项目利用GitHub Action，以[mcr.microsoft.com/dotnet/aspnet](https://hub.docker.com/_/microsoft-dotnet-aspnet)为基础镜像，将DDTVLiveRec的发行版及ffmpeg，打包成Docker镜像，自动上传至[DockerHub](https://hub.docker.com/r/as737345039/ddtvliverec)。
 
 支持的各架构及其基础镜像如下（截至2021/3/14）：
 
-|  架构 | ASP.NET Tag | OS Version  | Dockerfile |
-|  ----  | ----  | ----  | ----  |
-| amd64  | 5.0-alpine | Alpine 3.13 | [Dockerfile](https://github.com/aS737345039/Docker-DDTVLiveRec/blob/dockerhub/DDTVLiveRec/Dockerfile.alpine) |
-| arm64v8  | 5.0-alpine | Alpine 3.13 | [Dockerfile](https://github.com/aS737345039/Docker-DDTVLiveRec/blob/dockerhub/DDTVLiveRec/Dockerfile.alpine) |
-| arm32v7  | latest | Debian 10 | [Dockerfile](https://github.com/aS737345039/Docker-DDTVLiveRec/blob/dockerhub/DDTVLiveRec/Dockerfile.debian) |
+|  架构 | ASP.NET Tag | OS Version  | Dockerfile | Tag & Size |
+| ---- | ---- | ---- | ---- | ---- |
+| amd64  | 5.0-alpine | Alpine 3.13 | [Dockerfile](https://github.com/aS737345039/Docker-DDTVLiveRec/blob/dockerhub/DDTVLiveRec/Dockerfile.alpine) | [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/as737345039/ddtvliverec/latest-amd64?label=latest-amd64&style=flat-square)](https://hub.docker.com/r/as737345039/ddtvliverec/tags?page=1&ordering=last_updated) |
+| arm64v8  | 5.0-alpine | Alpine 3.13 | [Dockerfile](https://github.com/aS737345039/Docker-DDTVLiveRec/blob/dockerhub/DDTVLiveRec/Dockerfile.alpine) | [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/as737345039/ddtvliverec/latest-arm64v8?label=latest-arm64v8&style=flat-square)](https://hub.docker.com/r/as737345039/ddtvliverec/tags?page=1&ordering=last_updated) |
+| arm32v7  | latest | Debian 10 | [Dockerfile](https://github.com/aS737345039/Docker-DDTVLiveRec/blob/dockerhub/DDTVLiveRec/Dockerfile.debian) | [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/as737345039/ddtvliverec/latest-arm32v7?label=latest-arm32v7&style=flat-square)](https://hub.docker.com/r/as737345039/ddtvliverec/tags?page=1&ordering=last_updated) |
 
 ## 使用方法
 
 ### 1. 更新本镜像
 
-[![DDTVLiveRec_docker](https://github.com/aS737345039/Docker-DDTVLiveRec/actions/workflows/DDTVLiveRec_docker.yml/badge.svg)](https://github.com/aS737345039/Docker-DDTVLiveRec/actions/workflows/DDTVLiveRec_docker.yml)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/CHKZL/DDTV2?label=DDTVLiveRec&style=flat-square)](https://github.com/CHKZL/DDTV2/releases/latest)
+[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/as737345039/ddtvliverec?label=DockerHub&style=flat-square)](https://hub.docker.com/r/as737345039/ddtvliverec/tags?page=1&ordering=last_updated)
+[![GitHub Repo stars](https://img.shields.io/github/stars/aS737345039/Docker-DDTVLiveRec?color=orange&style=flat-square)](https://github.com/aS737345039/Docker-DDTVLiveRec)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/aS737345039/Docker-DDTVLiveRec/DDTVLiveRec_docker?label=Docker%20Build&style=flat-square)](https://github.com/aS737345039/Docker-DDTVLiveRec/actions/workflows/DDTVLiveRec_docker.yml)
 
-- 查看[源项目最新发行](https://github.com/CHKZL/DDTV2/releases/latest)，若[Tags页](https://hub.docker.com/r/as737345039/ddtvliverec/tags?page=1&ordering=last_updated)里无最新发行，在github中Star[本项目](https://github.com/aS737345039/Docker-DDTVLiveRec)进行自动更新，在[Action](https://github.com/aS737345039/Docker-DDTVLiveRec/actions)中查看进度。
+- 若上面两个蓝黑色徽章的版本不同，在github中Star[本项目](https://github.com/aS737345039/Docker-DDTVLiveRec)进行自动更新，在[Action](https://github.com/aS737345039/Docker-DDTVLiveRec/actions/workflows/DDTVLiveRec_docker.yml)中查看进度。
 
 ### 2. 准备文件（详见[源项目使用说明](https://github.com/CHKZL/DDTV2/tree/master/DDTVLiveRec#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)）
 
