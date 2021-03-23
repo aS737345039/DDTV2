@@ -2,7 +2,7 @@
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/CHKZL/DDTV2?label=DDTVLiveRec&style=flat-square)](https://github.com/CHKZL/DDTV2/releases/latest)
 [![Docker Image Version (latest by date)](https://img.shields.io/docker/v/as737345039/ddtvliverec?label=DockerHub&style=flat-square)](https://hub.docker.com/r/as737345039/ddtvliverec/tags?page=1&ordering=last_updated)
-[![GitHub Repo stars](https://img.shields.io/github/stars/aS737345039/Docker-DDTVLiveRec?color=orange&style=flat-square)](https://github.com/aS737345039/Docker-DDTVLiveRec)
+[![GitHub Repo stars](https://img.shields.io/github/stars/aS737345039/Docker-DDTVLiveRec?label=Stars&color=red&style=flat-square)](https://github.com/aS737345039/Docker-DDTVLiveRec)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/aS737345039/Docker-DDTVLiveRec/DDTVLiveRec_docker?label=Docker%20Build&style=flat-square)](https://github.com/aS737345039/Docker-DDTVLiveRec/actions/workflows/DDTVLiveRec_docker.yml)
 
 [源项目地址](https://github.com/CHKZL/DDTV2)　　[本项目地址](https://github.com/aS737345039/Docker-DDTVLiveRec)　　[zzcabc的ddtv项目提供了由源码编译的镜像](https://hub.docker.com/r/zzcabc/ddtv)
@@ -23,7 +23,7 @@
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/CHKZL/DDTV2?label=DDTVLiveRec&style=flat-square)](https://github.com/CHKZL/DDTV2/releases/latest)
 [![Docker Image Version (latest by date)](https://img.shields.io/docker/v/as737345039/ddtvliverec?label=DockerHub&style=flat-square)](https://hub.docker.com/r/as737345039/ddtvliverec/tags?page=1&ordering=last_updated)
-[![GitHub Repo stars](https://img.shields.io/github/stars/aS737345039/Docker-DDTVLiveRec?color=orange&style=flat-square)](https://github.com/aS737345039/Docker-DDTVLiveRec)
+[![GitHub Repo stars](https://img.shields.io/github/stars/aS737345039/Docker-DDTVLiveRec?label=Stars&color=red&style=flat-square)](https://github.com/aS737345039/Docker-DDTVLiveRec)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/aS737345039/Docker-DDTVLiveRec/DDTVLiveRec_docker?label=Docker%20Build&style=flat-square)](https://github.com/aS737345039/Docker-DDTVLiveRec/actions/workflows/DDTVLiveRec_docker.yml)
 
 - 若上面两个蓝黑色徽章的版本不同，在github中Star[本项目](https://github.com/aS737345039/Docker-DDTVLiveRec)进行自动更新，在[Action](https://github.com/aS737345039/Docker-DDTVLiveRec/actions/workflows/DDTVLiveRec_docker.yml)中查看进度。
