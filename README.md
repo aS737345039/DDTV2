@@ -15,7 +15,7 @@
 | ---- | ---- | ---- | ---- | ---- |
 | amd64  | 5.0-alpine | Alpine 3.13 | [Dockerfile](https://github.com/aS737345039/Docker-DDTVLiveRec/blob/dockerhub/DDTVLiveRec/Dockerfile.alpine) | [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/as737345039/ddtvliverec/latest-amd64?label=latest-amd64&style=flat-square)](https://hub.docker.com/r/as737345039/ddtvliverec/tags?page=1&ordering=last_updated) |
 | arm64v8  | 5.0-alpine | Alpine 3.13 | [Dockerfile](https://github.com/aS737345039/Docker-DDTVLiveRec/blob/dockerhub/DDTVLiveRec/Dockerfile.alpine) | [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/as737345039/ddtvliverec/latest-arm64v8?label=latest-arm64v8&style=flat-square)](https://hub.docker.com/r/as737345039/ddtvliverec/tags?page=1&ordering=last_updated) |
-| arm32v7  | latest | Debian 10 | [Dockerfile](https://github.com/aS737345039/Docker-DDTVLiveRec/blob/dockerhub/DDTVLiveRec/Dockerfile.debian) | [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/as737345039/ddtvliverec/latest-arm32v7?label=latest-arm32v7&style=flat-square)](https://hub.docker.com/r/as737345039/ddtvliverec/tags?page=1&ordering=last_updated) |
+| arm32v7  | 5.0 | Debian 10 | [Dockerfile](https://github.com/aS737345039/Docker-DDTVLiveRec/blob/dockerhub/DDTVLiveRec/Dockerfile.debian) | [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/as737345039/ddtvliverec/latest-arm32v7?label=latest-arm32v7&style=flat-square)](https://hub.docker.com/r/as737345039/ddtvliverec/tags?page=1&ordering=last_updated) |
 
 ## 使用方法
 
