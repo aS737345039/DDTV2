@@ -10,7 +10,7 @@ RUN apk add --no-cache ffmpeg tzdata \
     && mv DDTVLiveRec-Release/DDTV*/DDTV*/* /DDTVLiveRec \
     && rm -rf DDTVLiveRec-* \
     && apk del --purge tzdata \
-    && rm -rf /var/cache/apk/* /root/.cache rm -rf /tmp/*
+    && rm -rf /var/cache/apk/* /root/.cache /tmp/*
 EXPOSE 11419
 VOLUME /DDTVLiveRec/tmp /DDTVLiveRec/BiliUser.ini /DDTVLiveRec/RoomListConfig.json
 ENTRYPOINT ["dotnet", "DDTVLiveRec.dll"]
